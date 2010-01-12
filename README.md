@@ -9,3 +9,7 @@
 [http://www.fatvat.co.uk/2010/01/web-sockets-and-haskell.html](http://www.fatvat.co.uk/2010/01/web-sockets-and-haskell.html)
 
 [http://www.fatvat.co.uk/2010/01/bidirectional-web-sockets.html](http://www.fatvat.co.uk/2010/01/bidirectional-web-sockets.html)
+
+# Code samples
+
+[http://github.com/fffej/haskellprojects/tree/master/websockets/](http://github.com/fffej/haskellprojects/tree/master/websockets/)
