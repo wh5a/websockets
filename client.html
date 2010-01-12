@@ -1,0 +1,57 @@
+<html>
+<head>
+  <title>Web Sockets</title>
+
+  <script src="http://www.google.com/jsapi"></script>
+  <script>
+    google.load('jquery','1.3.2');
+  </script>
+
+  <script>
+    $(document).ready(function() {
+    
+      if ("WebSocket" in window) {
+        var ws = new WebSocket("ws://localhost:9876/");
+        var opened = false;
+        ws.onopen = function() {
+          $('#connectionStatus').text('Connection opened');
+          opened = true;
+        };
+        ws.onmessage = function(evt) {
+          $('#output').prepend("<p>New message: " + evt.data + "</p>");
+        };
+        ws.onclose = function() {
+           $('#connectionStatus').text('Connection closed');
+           opened = false;
+        };
+        $('#sendbutton').click(function () {
+          if (opened) {
+            ws.send($('#inputbox').val());
+            $('#inputbox').val('').focus();
+            
+          };
+        });
+      }
+      else {
+        $('#connectionStatus').append('<p>Your browser does not support web sockets</p>');
+      }
+    });
+  </script>
+
+</head>
+<body>
+  <h1>I'm doing something</h1>
+
+  <div id="input">
+    <input type="text" id="inputbox" placeholder="write input here"/>
+    <input type="button" id="sendbutton" value="send"/>
+  </div>
+
+  <div id="output">
+  </div>
+
+  <div id="connectionStatus">
+  </div>
+
+</body>
+</html>
