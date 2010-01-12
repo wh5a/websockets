@@ -1,6 +1,6 @@
 import Network (listenOn, PortID(..), accept, withSocketsDo, sClose, Socket)
 import System.IO
-import Control.Concurrent (forkIO, threadDelay)
+import Control.Concurrent (forkIO)
 import Data.Char (chr, toUpper)
 import Control.Monad (liftM, forever)
 
@@ -26,7 +26,6 @@ main = withSocketsDo $ do
          socket <- listenOn (PortNumber 9876)
          acceptLoop socket
          sClose socket
-         return ()
 
 listenLoop :: Handle  -> IO ()
 listenLoop h = do
@@ -45,5 +44,5 @@ readFrame h str  = do
   if new == chr 0
      then readFrame h ""
      else if new == chr 255
-          then return str
-          else readFrame h (str++[new])
+          then return $ reverse str
+          else readFrame h (new:str)
